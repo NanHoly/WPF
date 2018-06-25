@@ -1,0 +1,129 @@
+﻿<Window x:Class="WPFSamplesTest.Camera1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Camera1" Height="500" Width="500">
+    <Window.Resources>
+        <DiffuseMaterial x:Key="DiffuseMaterialStyle" Viewport2DVisual3D.IsVisualHostMaterial="True" 
+                         Brush="White"/>
+    </Window.Resources>
+    <Grid>
+        <Button Width="110" Height="40" Content="水平转动" FontSize="20" Margin="10,59,372,370" Click="Button_Click_Horizontal"></Button>
+        <Button Width="110" Height="40" Content="垂直转动" FontSize="20" Margin="340,370,42,59" Click="Button_Click_Vertical"></Button>
+        <Viewport3D x:Name="view" ClipToBounds="True" RenderOptions.EdgeMode="Aliased" Margin="-10,0,10,0">
+            <!--添加一个照相机-->
+            <Viewport3D.Camera>
+                <PerspectiveCamera x:Name="perspectiveCam" FieldOfView="59" Position="0.5,0.5,2" LookDirection="0,0,-1">
+                    <PerspectiveCamera.Transform>
+                        <RotateTransform3D x:Name="rot" CenterY="0.5" CenterX="0.5" CenterZ="-0.5">
+                            <RotateTransform3D.Rotation>
+                                <AxisAngleRotation3D x:Name="AxisAngleRot" Axis="0,0,0" Angle="0"/>
+                            </RotateTransform3D.Rotation>
+                        </RotateTransform3D>
+                    </PerspectiveCamera.Transform>
+                </PerspectiveCamera>
+            </Viewport3D.Camera>   
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <AmbientLight Color="White" />
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
+            <!--前面-->
+            <Viewport2DVisual3D Material="{StaticResource  DiffuseMaterialStyle }">
+                <Viewport2DVisual3D.Geometry>
+                    <MeshGeometry3D Positions="0,1,0    0,0,0   1,0,0    1,1,0"
+              TextureCoordinates="0,0   0,1  1,1   1,0"
+              TriangleIndices="0 1 3  1 2 3"/>
+                </Viewport2DVisual3D.Geometry>
+                <Border BorderThickness="10" x:Name="FrontSide" BorderBrush="Pink" CornerRadius="1"  
+        PreviewMouseDown="FrontSide_PreviewMouseDown">
+                    <TextBlock Text="Welcome" Foreground="Green" />
+                </Border>
+            </Viewport2DVisual3D>
+            <!--右面-->
+            <Viewport2DVisual3D Material="{StaticResource DiffuseMaterialStyle}">
+                <Viewport2DVisual3D.Geometry>
+                    <MeshGeometry3D Positions="1,1,0     1,0,0     1,0,-1     1,1,-1"
+                TextureCoordinates="0,0 0,1 1,1 1,0"
+                TriangleIndices="0 1 2  0 2 3"/>
+                </Viewport2DVisual3D.Geometry>
+                <Border BorderThickness="1" x:Name="RightSide" BorderBrush="Lime" CornerRadius="4"
+           PreviewMouseDown="RightSide_PreviewMouseDown"  >
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <TextBlock Text="感谢您的支持" FontSize="20"/>         
+                </Border>
+            </Viewport2DVisual3D>
+            <!--左面-->
+            <Viewport2DVisual3D Material="{StaticResource DiffuseMaterialStyle}">
+                <Viewport2DVisual3D.Geometry>
+                    <MeshGeometry3D Positions="0,1,-1  0,0,-1  0,0,0  0,1,0"
+                TextureCoordinates="0,0 0,1 1,1 1,0"
+                TriangleIndices="0 1 2  0 2 3"/>
+                </Viewport2DVisual3D.Geometry>
+                <Border BorderThickness="1" x:Name="LeftSide" BorderBrush="Purple" CornerRadius="4"
+           PreviewMouseDown="LeftSide_PreviewMouseDown"  >
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <TextBlock Text="我是左边的兔子" FontSize="20"/>
+                </Border>
+            </Viewport2DVisual3D>
+            <!--后面-->
+            <Viewport2DVisual3D Material="{StaticResource DiffuseMaterialStyle}">
+                <Viewport2DVisual3D.Geometry>
+                    <MeshGeometry3D Positions="1,1,-1  1,0,-1  0,0,-1  0,1,-1"
+                TextureCoordinates="0,0 0,1 1,1 1,0"
+                TriangleIndices="0 1 2  0 2 3"/>
+                </Viewport2DVisual3D.Geometry>
+                <Border BorderThickness="1" x:Name="BackSide" BorderBrush="Red" CornerRadius="4"
+           PreviewMouseDown="BackSide_PreviewMouseDown"  >
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <TextBlock Text="我是后边的兔子" FontSize="20"/>
+                </Border>
+            </Viewport2DVisual3D>
+            <!--下面-->
+            <Viewport2DVisual3D Material="{StaticResource DiffuseMaterialStyle}">
+                <Viewport2DVisual3D.Geometry>
+                    <MeshGeometry3D Positions="0,0,0  0,0,-1  1,0,-1  1,0,0"
+                TextureCoordinates="0,0 0,1 1,1 1,0"
+                TriangleIndices="0 1 2  0 2 3"/>
+                </Viewport2DVisual3D.Geometry>
+                <Border BorderThickness="1" x:Name="DownSide" BorderBrush="Yellow" CornerRadius="4"
+           PreviewMouseDown="DownSide_PreviewMouseDown"  >
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <TextBlock Text="我是下面的兔子" FontSize="20"/>
+                </Border>
+            </Viewport2DVisual3D>
+            <!--上面-->
+            <Viewport2DVisual3D Material="{StaticResource DiffuseMaterialStyle}">
+                <Viewport2DVisual3D.Geometry>
+                    <MeshGeometry3D Positions="0,1,-1 0,1,0  1,1,0  1,1,-1 "
+                TextureCoordinates="0,0 0,1 1,1 1,0"
+                TriangleIndices="0 1 2  0 2 3"/>
+                </Viewport2DVisual3D.Geometry>
+                <Border BorderThickness="1" x:Name="UpSide" BorderBrush="AliceBlue" CornerRadius="4"
+           PreviewMouseDown="UpSide_PreviewMouseDown"  >
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <TextBlock Text="我是上面的兔子" FontSize="20"/>
+                </Border>
+            </Viewport2DVisual3D>
+        </Viewport3D>
+    </Grid>
+</Window>
