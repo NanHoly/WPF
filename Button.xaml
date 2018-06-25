@@ -1,0 +1,43 @@
+﻿<Window x:Class="WPFSamplesTest.Button"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="Button" Height="450" Width="600">
+    <Window.Resources>
+        <Style TargetType="Button" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button" >
+                        <Border x:Name="border" Background="SkyBlue" 
+                                CornerRadius="10" Height="30" BorderBrush="Black" BorderThickness="0" SnapsToDevicePixels="True">
+                            <Border.Effect>
+                                <DropShadowEffect Color="Black" Direction="0" ShadowDepth="3" Opacity="1" />
+                            </Border.Effect>
+                            <TextBlock Text="{TemplateBinding Content}" 
+                                  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="16" FontFamily="黑体">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect Color="Black" Direction="0" ShadowDepth="1" Opacity="1" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" Value="LightBlue" TargetName="border"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" Value="SkyBlue" TargetName="border"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        </Window.Resources>
+    <Grid Background="Brown" >
+        <Button Content="暂停" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="445,344,0,0"></Button>
+        <Button Content="添加" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"  Margin="100,344,0,0"></Button>
+        <Button Content="播放" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="219,344,0,0"></Button>
+        <Button Content="开始" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="327,344,0,0" ></Button>
+    </Grid>
+</Window>
